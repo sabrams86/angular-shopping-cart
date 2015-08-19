@@ -1,11 +1,15 @@
 <div class="search">
   Search By Category:
-  <select name="catSearch">
-    <option value="option" ng-repeat="category in tea.categories">{{category}}</option>
+  <select name="catSearch" ng-model="catSearch.categories">
+    <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
   </select>
   <label>Search By Name:
     <input type="text" name="textSearch" ng-model="textSearch.name">
   </label>
+  <button class="right" type="button" name="cart" ng-click="goToCart()">
+    Checkout |
+    <ng-pluralize count="cart.length" when="{0: ' Bag Empty! ', 1: ' Bag ({}) ', other: ' Bag ({}) '}"></ng-pluralize>
+  </button>
 </div>
 <table>
   <thead>
@@ -26,7 +30,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="tea in teas | filter: textSearch | orderBy:'+price' : sort">
+    <tr ng-repeat="tea in teas | filter: textSearch | filter: catSearch | orderBy:'+price' : sort">
       <td>
         <img src={{tea.imageUrl}} alt="Tea Image" />
       </td>
@@ -36,7 +40,7 @@
         <div><strong>Caffeine Scale: </strong><span>{{tea.caffeineScale}}</span></div>
         <div><strong>Ingredients: </strong><span>{{tea.ingredients}}</span></div>
         <div><strong>Rating: </strong><span>{{tea.rating}}</span></div>
-        <div><strong>In Stock: </strong><span>{{tea.inStock}}</span></div>
+        <div><strong>In Stock: </strong><span>{{tea.inStock | stockFormat}}</span></div>
         <div><strong>Categories:</strong></div>
         <ul>
           <li ng-repeat="category in tea.categories">{{category}}</li>
@@ -44,8 +48,8 @@
       </td>
       <td>
         <h3>Quantity:</h3>
-        <select name="quantity">
-          <option value="1" selected="">1</option>
+        <select name="quantity" ng-model='quantity'>
+          <option value="1" selected="selected">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
@@ -56,7 +60,7 @@
           <option value="9">9</option>
           <option value="10">10</option>
         </select>
-        <button type="button" ng-click="addToCart()">Add To Bag</button>
+        <button type="button" ng-click="addToCart()" ng-disabled="!tea.inStock">Add To Bag</button>
       </td>
     </tr>
   </tbody>

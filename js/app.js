@@ -10,4 +10,5 @@ app.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'partials/cart',
       controller: 'CartController'
     })
+    .otherwise({redirectTo: '/'});
 }]);

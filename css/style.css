@@ -10,6 +10,44 @@ html, body {
   width: 960px;
   margin: 0 auto;
 }
+.navbar {
+  height: 50px;
+  padding: 10px;
+  background-color: #cccccc;
+  border: 1px solid #bbbbbb;
+  border-style: inset;
+}
+.navbar a{
+  color: #555555;
+  font-size: 24px;
+  text-decoration: none;
+  margin: 0 50px;
+}
+.search {
+  margin: 20px 0;
+}
+.right {
+  float: right;
+}
+.head h2 {
+  display: inline-block;
+  vertical-align: top;
+}
+button {
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid white;
+  outline: none;
+  background-color: #DA9D48;
+  color: #ffffff;
+}
+.search button {
+  background-color: #DA5450;
+  color: #ffffff;
+}
+button:active {
+  color: #cccccc;
+}
 th, td {
   border: 1px solid grey;
   vertical-align: top;
@@ -17,6 +55,7 @@ th, td {
 }
 table {
   border-collapse: collapse;
+  width: 100%;
 }
 header > .container > h1 {
   color: #FB7E5B;

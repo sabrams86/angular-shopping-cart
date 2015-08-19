@@ -1,9 +1,42 @@
-app.controller('HomeController', ['$scope', function ($scope) {
+var cart = [];
+
+app.controller('HomeController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
+  // $http.get('http://localhost:8080/data/seed.json').then(function (results) {
+  //   $scope.teas = results;
+  // }, function (err) {
+  //   console.log(err);
+  // })
   $scope.teas = data;
+  $scope.cart = cart;
+  $scope.categories = data.reduce(function (prev, curr) {
+    return prev.concat(curr.categories);
+  }, []).filter(function(category, i, arr) {
+    return arr.indexOf(category) == i;
+})
+  $scope.goToCart = function () {
+    $location.path('/cart');
+  }
+  $scope.addToCart = function () {
+    var item = {};
+    item = this.tea;
+    item.quantity = this.quantity ? this.quantity : 1;
+    cart.push(item);
+  }
 }]);
 
 app.controller('CartController', ['$scope', function ($scope) {
+  console.log(cart);
+  $scope.cart = cart;
+  $scope.showEdit = false;
+  $scope.total = cart.reduce(function (prev, curr) {
+    return (curr.price * 0.01) * curr.quantity;
+  }, 0);
+  $scope.removeItem = function () {
+    cart = cart.splice(cart.indexOf(this.item), 1);
+  }
+  $scope.editQty =function () {
 
+  }
 }]);
 
 
@@ -40,7 +73,7 @@ var data = [
         ingredients: "hot sauce, iron, beetle nut, fresco, blarney, raw mashed potato",
         caffeineScale: 38,
         price: 4991,
-        inStock: true,
+        inStock: false,
         rating: 4,
         imageUrl: "http://s7d5.scene7.com/is/image/Teavana/31358_d?$cimg$",
         __v: 0,
