@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "helvetica", sans-serif;
+}
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+th, td {
+  border: 1px solid grey;
+  vertical-align: top;
+  padding: 10px;
+}
+table {
+  border-collapse: collapse;
+}
+header > .container > h1 {
+  color: #FB7E5B;
+  font-style: italic;
+}
+header > .container > .banner {
+  text-align: center;
+  color: #ffffff;
+  background-color: #FB7E5B;
+}
